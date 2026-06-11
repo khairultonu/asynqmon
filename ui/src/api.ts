@@ -16,12 +16,14 @@ export interface ListQueuesResponse {
 export interface ListTasksResponse {
   tasks: TaskInfo[];
   stats: Queue;
+  total_count?: number;
 }
 
 export interface ListAggregatingTasksResponse {
   tasks: TaskInfo[];
   stats: Queue;
   groups: GroupInfo[];
+  total_count?: number;
 }
 
 export interface ListServersResponse {
@@ -359,9 +361,11 @@ export interface SchedulerEnqueueEvent {
   enqueued_at: string;
 }
 
-export interface PaginationOptions extends Record<string, number | undefined> {
+export interface PaginationOptions extends Record<string, number | string | undefined> {
   size?: number; // size of the page
   page?: number; // page number (1 being the first page)
+  q?: string; // search query
+  field?: string; // search field (id or type)
 }
 
 export async function listQueues(): Promise<ListQueuesResponse> {

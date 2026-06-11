@@ -36,6 +36,7 @@ function mapStateToProps(state: AppState) {
     allActionPending: state.tasks.archivedTasks.allActionPending,
     pollInterval: state.settings.pollInterval,
     pageSize: state.settings.taskRowsPerPage,
+    totalCount: state.tasks.archivedTasks.totalCount,
   };
 }
 
@@ -57,6 +58,8 @@ type ReduxProps = ConnectedProps<typeof connector>;
 interface Props {
   queue: string; // name of the queue.
   totalTaskCount: number; // totoal number of archived tasks.
+  searchQuery: string;
+  searchField: string;
 }
 
 const columns: TableColumn[] = [
@@ -168,6 +171,7 @@ function ArchivedTasksTable(props: Props & ReduxProps) {
       columns={columns}
       renderRow={(rowProps: RowProps) => <Row {...rowProps} />}
       {...props}
+      totalTaskCount={props.totalCount !== undefined ? props.totalCount : props.totalTaskCount}
     />
   );
 }
