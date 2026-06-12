@@ -8,7 +8,7 @@ if [ -z "$1" ]; then
 fi
 
 TAG=$1
-IMAGE_NAME="ghcr.io/klikit/shadowchef/core"
+IMAGE_NAME="ghcr.io/klikit/shadowchef/asynqmon"
 FULL_IMAGE="$IMAGE_NAME:$TAG"
 
 # Build the docker image
