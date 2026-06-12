@@ -16,3 +16,9 @@ require (
 	golang.org/x/time v0.3.0 // indirect
 	google.golang.org/protobuf v1.30.0 // indirect
 )
+
+// Locally patched copy of asynq v0.24.1 with the fix from
+// https://github.com/hibiken/asynq/pull/1092 applied to
+// internal/rdb/inspect.go (memoryUsageCmd Lua script). See
+// internal/thirdparty/asynq/README.md for details.
+replace github.com/hibiken/asynq => ./internal/thirdparty/asynq
