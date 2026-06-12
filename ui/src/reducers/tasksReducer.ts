@@ -181,6 +181,7 @@ interface TasksState {
     allActionPending: boolean;
     error: string;
     data: TaskInfoExtended[];
+    totalCount?: number;
   };
   pendingTasks: {
     loading: boolean;
@@ -188,6 +189,7 @@ interface TasksState {
     allActionPending: boolean;
     error: string;
     data: TaskInfoExtended[];
+    totalCount?: number;
   };
   scheduledTasks: {
     loading: boolean;
@@ -195,6 +197,7 @@ interface TasksState {
     allActionPending: boolean;
     error: string;
     data: TaskInfoExtended[];
+    totalCount?: number;
   };
   retryTasks: {
     loading: boolean;
@@ -202,6 +205,7 @@ interface TasksState {
     allActionPending: boolean;
     error: string;
     data: TaskInfoExtended[];
+    totalCount?: number;
   };
   archivedTasks: {
     loading: boolean;
@@ -209,6 +213,7 @@ interface TasksState {
     allActionPending: boolean;
     error: string;
     data: TaskInfoExtended[];
+    totalCount?: number;
   };
   completedTasks: {
     loading: boolean;
@@ -216,6 +221,7 @@ interface TasksState {
     allActionPending: boolean;
     error: string;
     data: TaskInfoExtended[];
+    totalCount?: number;
   };
   aggregatingTasks: {
     group: string;
@@ -224,6 +230,7 @@ interface TasksState {
     allActionPending: boolean;
     error: string;
     data: TaskInfoExtended[];
+    totalCount?: number;
   };
   taskInfo: {
     loading: boolean;
@@ -343,6 +350,7 @@ function tasksReducer(
             canceling: false,
             requestPending: false,
           })),
+          totalCount: action.payload.total_count,
         },
       };
 
@@ -377,6 +385,7 @@ function tasksReducer(
             ...task,
             requestPending: false,
           })),
+          totalCount: action.payload.total_count,
         },
       };
 
@@ -411,6 +420,7 @@ function tasksReducer(
             ...task,
             requestPending: false,
           })),
+          totalCount: action.payload.total_count,
         },
       };
 
@@ -445,6 +455,7 @@ function tasksReducer(
             ...task,
             requestPending: false,
           })),
+          totalCount: action.payload.total_count,
         },
       };
 
@@ -479,6 +490,7 @@ function tasksReducer(
             ...task,
             requestPending: false,
           })),
+          totalCount: action.payload.total_count,
         },
       };
 
@@ -513,6 +525,7 @@ function tasksReducer(
             ...task,
             requestPending: false,
           })),
+          totalCount: action.payload.total_count,
         },
       };
 
@@ -549,6 +562,7 @@ function tasksReducer(
             ...task,
             requestPending: false,
           })),
+          totalCount: action.payload.total_count,
         },
       };
 

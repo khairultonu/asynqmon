@@ -44,6 +44,7 @@ function mapStateToProps(state: AppState) {
     tasks: state.tasks.aggregatingTasks.data,
     pollInterval: state.settings.pollInterval,
     pageSize: state.settings.taskRowsPerPage,
+    totalCount: state.tasks.aggregatingTasks.totalCount,
   };
 }
 
@@ -65,9 +66,11 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof connector>;
 
 interface Props {
-  queue: string;
-  selectedGroup: string;
-  totalTaskCount: number; // total number of tasks in the group
+  queue: string; // name of the queue
+  totalTaskCount: number; // total number of aggregating tasks
+  selectedGroup: string; // name of the selected group
+  searchQuery: string;
+  searchField: string;
 }
 
 const columns: TableColumn[] = [
@@ -218,7 +221,7 @@ function AggregatingTasksTable(props: Props & ReduxProps) {
   return (
     <TasksTable
       queue={props.queue}
-      totalTaskCount={props.totalTaskCount}
+      totalTaskCount={props.totalCount !== undefined ? props.totalCount : props.totalTaskCount}
       taskState="aggregating"
       loading={props.loading}
       error={props.error}

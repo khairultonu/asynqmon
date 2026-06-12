@@ -55,6 +55,8 @@ interface Props {
   pollInterval: number;
   pageSize: number;
   columns: TableColumn[];
+  searchQuery?: string;
+  searchField?: string;
 
   // actions
   listTasks: (qname: string, pgn: PaginationOptions) => void;
@@ -187,9 +189,14 @@ export default function TasksTable(props: Props) {
   }
 
   const fetchData = useCallback(() => {
-    const pageOpts = { page: page + 1, size: pageSize };
+    const pageOpts: PaginationOptions = {
+      page: page + 1,
+      size: pageSize,
+      q: props.searchQuery,
+      field: props.searchField
+    };
     listTasks(queue, pageOpts);
-  }, [page, pageSize, queue, listTasks]);
+  }, [page, pageSize, queue, listTasks, props.searchQuery, props.searchField]);
 
   usePolling(fetchData, pollInterval);
 

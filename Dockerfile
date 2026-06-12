@@ -31,7 +31,10 @@ FROM golang:1.18-alpine AS backend
 WORKDIR /build
 
 # Copy and download dependencies.
+# internal/thirdparty is needed here too since go.mod has a local
+# "replace" directive pointing at internal/thirdparty/asynq.
 COPY go.mod go.sum ./
+COPY internal/thirdparty ./internal/thirdparty
 RUN go mod download
 
 # Copy a source code to the container.

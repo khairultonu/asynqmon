@@ -36,6 +36,7 @@ function mapStateToProps(state: AppState) {
     allActionPending: state.tasks.pendingTasks.allActionPending,
     pollInterval: state.settings.pollInterval,
     pageSize: state.settings.taskRowsPerPage,
+    totalCount: state.tasks.pendingTasks.totalCount,
   };
 }
 
@@ -55,8 +56,10 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof connector>;
 
 interface Props {
-  queue: string;
+  queue: string; // name of the queue
   totalTaskCount: number; // total number of pending tasks
+  searchQuery: string;
+  searchField: string;
 }
 
 const columns: TableColumn[] = [
@@ -168,6 +171,7 @@ function PendingTasksTable(props: Props & ReduxProps) {
       columns={columns}
       renderRow={(rowProps: RowProps) => <Row {...rowProps} />}
       {...props}
+      totalTaskCount={props.totalCount !== undefined ? props.totalCount : props.totalTaskCount}
     />
   );
 }

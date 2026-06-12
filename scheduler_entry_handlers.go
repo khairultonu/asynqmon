@@ -42,7 +42,7 @@ type listSchedulerEnqueueEventsResponse struct {
 func newListSchedulerEnqueueEventsHandlerFunc(inspector *asynq.Inspector) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		entryID := mux.Vars(r)["entry_id"]
-		pageSize, pageNum := getPageOptions(r)
+		pageSize, pageNum, _, _ := getPageOptions(r)
 		events, err := inspector.ListSchedulerEnqueueEvents(
 			entryID, asynq.PageSize(pageSize), asynq.Page(pageNum))
 		if err != nil {

@@ -32,6 +32,7 @@ function mapStateToProps(state: AppState) {
     allActionPending: state.tasks.activeTasks.allActionPending,
     pollInterval: state.settings.pollInterval,
     pageSize: state.settings.taskRowsPerPage,
+    totalCount: state.tasks.activeTasks.totalCount,
   };
 }
 
@@ -60,6 +61,8 @@ type ReduxProps = ConnectedProps<typeof connector>;
 interface Props {
   queue: string; // name of the queue
   totalTaskCount: number; // total number of active tasks
+  searchQuery: string;
+  searchField: string;
 }
 
 function Row(props: RowProps) {
@@ -115,15 +118,15 @@ function Row(props: RowProps) {
         {task.canceling
           ? "Canceling"
           : task.is_orphaned
-          ? "Orphaned"
-          : "Running"}
+            ? "Orphaned"
+            : "Running"}
       </TableCell>
       <TableCell>
         {task.is_orphaned
           ? "-"
           : task.start_time === "-"
-          ? "just now"
-          : timeAgo(task.start_time)}
+            ? "just now"
+            : timeAgo(task.start_time)}
       </TableCell>
       <TableCell>
         {task.deadline === "-" ? "-" : durationBefore(task.deadline)}
@@ -167,6 +170,7 @@ function ActiveTasksTable(props: Props & ReduxProps) {
       columns={columns}
       renderRow={(rowProps: RowProps) => <Row {...rowProps} />}
       {...props}
+      totalTaskCount={props.totalCount !== undefined ? props.totalCount : props.totalTaskCount}
     />
   );
 }
