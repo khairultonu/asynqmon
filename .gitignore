@@ -36,4 +36,4 @@ dist/
 
 # examples
 examples/
-.build-and-push.sh
+build-and-push.sh
